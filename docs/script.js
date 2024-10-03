@@ -1,30 +1,56 @@
 const quizQuestions = [
     {
-        questionText: "What is the capital of France?",
-        options: ["Berlin", "Madrid", "Paris", "Rome"],
-        correctAnswer: "Paris"
+        questionText: "What is the capital of Italy?",
+        options: ["Paris", "Rome", "Berlin", "Madrid"],
+        correctAnswer: "Rome"
     },
     {
-        questionText: "Which planet is known as the Red Planet?",
-        options: ["Earth", "Mars", "Jupiter", "Saturn"],
-        correctAnswer: "Mars"
+        questionText: "Which gas do plants primarily absorb from the atmosphere?",
+        options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+        correctAnswer: "Carbon Dioxide"
     },
     {
-        questionText: "What is the largest mammal in the world?",
-        options: ["Elephant", "Blue Whale", "Giraffe", "Shark"],
-        correctAnswer: "Blue Whale"
+        questionText: "What is the largest organ in the human body?",
+        options: ["Heart", "Liver", "Skin", "Lungs"],
+        correctAnswer: "Skin"
     },
     {
-        questionText: "Which element has the chemical symbol 'O'?",
-        options: ["Oxygen", "Gold", "Hydrogen", "Carbon"],
-        correctAnswer: "Oxygen"
+        questionText: "Which planet is known as the Earth’s 'sister planet'?",
+        options: ["Venus", "Mars", "Jupiter", "Saturn"],
+        correctAnswer: "Venus"
     },
     {
-        questionText: "Who wrote 'Hamlet'?",
-        options: ["Charles Dickens", "J.K. Rowling", "William Shakespeare", "Mark Twain"],
-        correctAnswer: "William Shakespeare"
+        questionText: "Who painted the Mona Lisa?",
+        options: ["Vincent van Gogh", "Pablo Picasso", "Claude Monet", "Leonardo da Vinci"],
+        correctAnswer: "Leonardo da Vinci"
+    },
+    {
+        questionText: "Which element has the chemical symbol 'Fe'?",
+        options: ["Iron", "Fluorine", "Gold", "Copper"],
+        correctAnswer: "Iron"
+    },
+    {
+        questionText: "Who is the author of '1984'?",
+        options: ["George Orwell", "Aldous Huxley", "J.K. Rowling", "Ernest Hemingway"],
+        correctAnswer: "George Orwell"
+    },
+    {
+        questionText: "Which continent is the Sahara Desert located on?",
+        options: ["Asia", "Australia", "Africa", "South America"],
+        correctAnswer: "Africa"
+    },
+    {
+        questionText: "What is the chemical formula for water?",
+        options: ["H2O", "CO2", "O2", "N2"],
+        correctAnswer: "H2O"
+    },
+    {
+        questionText: "In which year did the Titanic sink?",
+        options: ["1912", "1905", "1920", "1918"],
+        correctAnswer: "1912"
     }
 ];
+
 
 let questionNumber = 0;
 let score = 0;
@@ -77,10 +103,10 @@ function nextQuestion() {
 }
 
 function selectOption(e) {
-    if (questionNumber <= 3) {
+    if (questionNumber <= quizQuestions.length -2) {
         nextBtn.classList.remove("hidden");
 
-    } else if (questionNumber == 4) {
+    } else if (questionNumber == quizQuestions.length -1) {
         scoreBtn.classList.remove("hidden")
     }
     quizQuestions.map((question, idx) => {
@@ -90,8 +116,6 @@ function selectOption(e) {
                 e.target.classList.add("bg-green-500");
                 score++;
             } else if (question.correctAnswer !== e.target.dataset.answer) {
-                console.log("qAnswer", question.correctAnswer);
-                console.log("data", e.target.dataset.answer);
                 document.querySelectorAll(".option").forEach(option => option.dataset.answer == question.correctAnswer ? option.classList.add("bg-green-500") : "")
                 e.target.classList.add("bg-red-500");
             }
@@ -103,7 +127,7 @@ function displayScore() {
     quizContainerEle.innerHTML = `
     <div class="py-20 mb-5">
         <h1 class="text-3xl font-bold text-slate-800">
-            Your score is ${score} / 5.
+            Your score is ${score} / ${quizQuestions.length}.
         </h1>
     </div>
     `;
